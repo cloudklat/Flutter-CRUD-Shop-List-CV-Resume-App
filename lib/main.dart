@@ -1,11 +1,36 @@
 import 'package:flutter/material.dart';
-import 'package:flutterv1/material/1_crud.dart';
-import 'package:flutterv1/material/2_cv.dart';
+// import 'package:english_words/english_words.dart';
+// import 'package:flutterv1/material/1_crud.dart';
+// import 'package:flutterv1/material/2_cv.dart';
+// import 'package:flutterv1/material/3_commerce_app.dart';
+// import 'package:flutterv1/material/0_firstapp.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'config/app_router.dart';
+import 'cubits/login_cubit.dart';
 
 void main() {
-  runApp(CvPage());
+  runApp(const MyApp());
 }
 
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => LoginCubit(),
+      child: Builder(builder: (context) {
+        return MaterialApp.router(
+          theme: ThemeData(brightness: Brightness.dark),
+          routerConfig: AppRouter(context.read<LoginCubit>()).router,
+          debugShowCheckedModeBanner: false,
+          title: 'Go Router 5.0.1',
+          // home: const CategoryScreen(),
+        );
+      }),
+    );
+  }
+}
 
 // class MyApp extends StatefulWidget {
 //   MyApp({super.key});
